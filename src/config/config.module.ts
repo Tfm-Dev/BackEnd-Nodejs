@@ -22,6 +22,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         DB_PORT: Joi.number().default(27017),
         DB_USR: Joi.string().default(''),
         DB_PSW: Joi.string().default(''),
+        DB_DB: Joi.string().default('backend')
       }),
     }),
   ],
