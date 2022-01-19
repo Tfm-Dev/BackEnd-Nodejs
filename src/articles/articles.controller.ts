@@ -21,7 +21,7 @@ export class ArticlesController {
 
   @Get()
   @ApiCreatedResponse({
-    description: 'The record has been successfully created.',
+    description: 'Find all articles.',
     type: Article,
   })
   findAll(): Promise<Article[]> {
@@ -30,7 +30,7 @@ export class ArticlesController {
 
   @Get(':id')
   @ApiCreatedResponse({
-    description: 'The record has been successfully created.',
+    description: 'Find article by id.',
     type: Article,
   })
   findOne(@Param('id') id: string): Promise<Article> {
@@ -39,7 +39,7 @@ export class ArticlesController {
 
   @Put(':id')
   @ApiCreatedResponse({
-    description: 'The record has been successfully created.',
+    description: 'The record has been successfully updated.',
     type: Article,
   })
   update(@Param('id') id: string, @Body() updateArticleDto: UpdateArticleDto): Promise<Article> {
@@ -48,7 +48,7 @@ export class ArticlesController {
 
   @Delete(':id')
   @ApiCreatedResponse({
-    description: 'The record has been successfully created.',
+    description: 'The record has been successfully deleted.',
     type: Article,
   })
   remove(@Param('id') id: string) {

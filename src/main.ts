@@ -1,19 +1,23 @@
 import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+
 import { AppModule } from './app.module';
+import { AppConfigService } from './config/config.service';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const appConfig: AppConfigService = app.get(AppConfigService);
 
   const config = new DocumentBuilder()
-    .setTitle('Challenge Space Flight News 🏅')
-    .setDescription('The challenge backend of Coodash')
-    .setVersion('1.0')
+    .setTitle(appConfig.title)
+    .setDescription(appConfig.desc)
+    .setVersion(appConfig.version)
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('documentation', app, document);
 
-  await app.listen(3000);
+  await app.listen(appConfig.port);
 }
 bootstrap();

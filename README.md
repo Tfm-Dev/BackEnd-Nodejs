@@ -13,6 +13,9 @@ $ npm install
 ## Running the app
 
 ```bash
+# Build project
+$ npm run build
+
 # development
 $ npm run start
 
@@ -21,6 +24,10 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
+# Docker
+$ docker image build -t back_end .
+$ docker run -it -p 3000:3000 back_end
 ```
 
 ## Test

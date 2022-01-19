@@ -1,63 +1,57 @@
-import { Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
-import { Document } from 'mongoose';
+import * as mongoose from 'mongoose';
 
-export type ArticleDocument = Article & Document;
+export type ArticleDocument = Article & mongoose.Document;
 
 @Schema({ versionKey: false })
-
-export class provider {
-    @ApiProperty()
-    @Prop()
-    id: string;
-
-    @ApiProperty({required: false})
-    @Prop({required: false})
-    provider: string
-}
-
 export class Article {
-    @ApiProperty({required: false})
     @Prop()
     _id: string;
 
     @ApiProperty({required: false,default: false})
-    @Prop({required: false,default: false})
-    featured: boolean;
+    @Prop({ default: false })
+    featured?: boolean;
 
     @ApiProperty({required: false})
-    @Prop()
+    @Prop({ required: true })
     title: string;
 
     @ApiProperty({required: false})
-    @Prop()
+    @Prop({ required: true })
     url: string;
 
     @ApiProperty({required: false})
-    @Prop()
+    @Prop({ required: true })
     imageUrl: string;
 
     @ApiProperty({required: false})
-    @Prop()
+    @Prop({ required: true })
     newsSite: string;
 
     @ApiProperty({required: false})
-    @Prop({required: false})
-    summary: string;
+    @Prop()
+    summary?: string;
 
     @ApiProperty({required: false})
+    @Prop({ required: true })
+    publishedAt: Date;
+
     @Prop()
-    publishedAt: string;
+    updatedAt?: Date;
 
-    @Prop({required: false})
-    updatedAt: string;
+    @ApiProperty({ required: false })
+    @Prop()
+    launches?: [{
+        id: String,
+        provider: String
+    }];
 
-    @ApiProperty({ required: false, type: [provider] })
-    @Prop({required: false})
-    launches: [provider];
-
-    @ApiProperty({ required: false, type: [provider] })
-    @Prop({required: false})
-    events: [provider];
+    @ApiProperty({ required: false })
+    @Prop()
+    events?: [{
+        id: String,
+        provider: String
+    }];
 }
 export const ArticleSchema = SchemaFactory.createForClass(Article);
